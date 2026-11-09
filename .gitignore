@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+data/inquiries.jsonl
+.env.local
+assets/uploads/*
+!assets/uploads/README.md
+

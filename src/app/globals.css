@@ -1,26 +1,121 @@
 @import "tailwindcss";
 
+/* Tokens. Palette is original; revisit after the real logo/photos arrive. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --ink: #0d1019; /* sampled from the SA Footwear logo background */
+  --ink-soft: #454a55;
+  --sand: #f5f2ec;
+  --paper: #fffdf9;
+  --line: #e3dacb;
+  --clay: #7a5c00; /* deep brass: 5.5:1 on sand, 6.2:1 with white text */
+  --gold: #d4a82f; /* logo gold, used for buttons with dark text (8:1) */
+  --gold-light: #f0c75e;
+  --logo-red: #e63a2e;
+  --clay-dark: #5e4700;
+  --leaf: #1f5a4b;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-sand: var(--sand);
+  --color-paper: var(--paper);
+  --color-line: var(--line);
+  --color-clay: var(--clay);
+  --color-clay-dark: var(--clay-dark);
+  --color-leaf: var(--leaf);
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --font-sans: var(--font-body), system-ui, sans-serif;
+  --font-display: var(--font-display), Georgia, serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
-
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--sand);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  overflow-x: clip;
 }
+
+:focus-visible {
+  outline: 3px solid var(--clay);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--ink);
+  color: #fff;
+  padding: 0.75rem 1rem;
+  z-index: 100;
+}
+.skip-link:focus {
+  left: 0.5rem;
+  top: 0.5rem;
+}
+
+/* Scroll reveal: starts visible without JS; JS adds .reveal-ready first. */
+.reveal-ready .reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal-ready .reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+@keyframes drift {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(0, -10px, 0); }
+}
+.drift { animation: drift 5s ease-in-out infinite alternate; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal-ready .reveal { opacity: 1; transform: none; transition: none; }
+  .drift { animation: none; }
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 48px;
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  font-weight: 600;
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn-primary { background: var(--gold); color: var(--ink); box-shadow: 0 6px 18px -8px var(--gold); }
+.btn-primary:hover { background: var(--gold-light); }
+.btn-dark { background: var(--ink); color: #fff; }
+.btn-dark:hover { background: #1b2030; }
+.btn-ghost { border: 2px solid var(--ink); color: var(--ink); }
+.btn-ghost:hover { background: var(--ink); color: #fff; }
+.btn-wa { background: #14683a; color: #fff; }
+.btn-wa:hover { background: #0f5230; }
+
+.field { display: grid; gap: 0.375rem; }
+.field label { font-weight: 600; font-size: 0.9rem; }
+.input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.65rem 0.9rem;
+  border: 1.5px solid #8a7f70;
+  border-radius: 10px;
+  background: var(--paper);
+  font-size: 1rem;
+}
+.input[aria-invalid="true"] { border-color: #b00020; }
+.err { color: #b00020; font-size: 0.85rem; }
