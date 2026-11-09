@@ -7,3 +7,6 @@
 6. Launch: set `SITE_LIVE=true`, redeploy, check `/robots.txt` and `/sitemap.xml`, submit sitemap in Search Console.
 Rollback: Vercel → Deployments → promote previous deployment. Back up the inquiry destination (sheet/CRM) separately.
 Self-hosting: `npm run build`, `INQUIRY_FILE_STORE=1 npm start` behind nginx + PM2.
+
+## Domain
+Production domain: `https://safootwear.work.gd`. Set `NEXT_PUBLIC_SITE_URL=https://safootwear.work.gd` in the host's environment variables (it is not committed). Point the domain's DNS at the host only when you are ready to deploy. The site stays noindex until `SITE_LIVE=true`.
