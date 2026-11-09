@@ -44,3 +44,5 @@ data/inquiries.jsonl
 assets/uploads/*
 !assets/uploads/README.md
 
+test-results/
+playwright-report/
