@@ -17,3 +17,8 @@ Woccy's official site (woccy.in) was **not** fetched or reused; no Woccy copy, l
 ## Update 2026-11-09 (owner)
 - Owner states SA Footwear is the **Woccy wholesale distributor for Telangana and Andhra Pradesh**. Site wording: "distributes", never "authorized/official". Keep the distribution letter/agreement on file; upgrade wording only with that document (see `woccyRelationship`).
 - Other brands: two **sample** brands added for layout (`sample: true`). They are noindex, absent from sitemap, schema and the inquiry form, and carry a visible "Sample" badge. Replace with real brands or delete.
+
+## Owner-supplied 2026-11-09
+- Phone: +91 99812 34567 (set via NEXT_PUBLIC_PHONE in .env.local / host env, not committed)
+- Location: Hyderabad, Telangana, India (city level only; no street address, so no LocalBusiness markup)
+- WhatsApp: not confirmed, so WhatsApp buttons stay hidden

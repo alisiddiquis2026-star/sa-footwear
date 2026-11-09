@@ -25,6 +25,9 @@ export const business = {
   phone: env.NEXT_PUBLIC_PHONE || "",
   email: env.NEXT_PUBLIC_EMAIL || "",
 
+  /** Owner-stated base location (city level only). Not a street address, so no LocalBusiness markup. */
+  location: "Hyderabad, Telangana, India",
+
   /** A real, verified premises only. null = no public address is shown. */
   address: null as null | {
     street: string;

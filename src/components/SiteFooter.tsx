@@ -40,6 +40,7 @@ export function SiteFooter() {
             {tel && <li><a className="hover:underline" href={tel}>{business.phone}</a></li>}
             {hasWhatsapp && wa && <li><a className="hover:underline" href={wa} rel="noopener noreferrer" target="_blank">WhatsApp</a></li>}
             {business.email && <li><a className="hover:underline" href={`mailto:${business.email}`}>{business.email}</a></li>}
+            <li>{business.location}</li>
             <li><Link className="hover:underline" href="/contact">Contact page</Link></li>
           </ul>
         </div>

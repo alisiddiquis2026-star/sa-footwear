@@ -23,6 +23,7 @@ export default function ContactPage() {
         <dl className="mt-10 grid gap-5 text-lg">
           {tel && <div><dt className="font-semibold">Phone</dt><dd><a className="underline" href={tel}>{business.phone}</a></dd></div>}
           {business.email && <div><dt className="font-semibold">Email</dt><dd><a className="underline" href={`mailto:${business.email}`}>{business.email}</a></dd></div>}
+          <div><dt className="font-semibold">Based in</dt><dd>{business.location}</dd></div>
           {business.address && (
             <div><dt className="font-semibold">Address</dt><dd>{business.address.street}, {business.address.locality}, {business.address.city}, {business.address.state} {business.address.postalCode}</dd></div>
           )}
