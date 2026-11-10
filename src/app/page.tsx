@@ -6,8 +6,9 @@ import { wholesaleFaqs } from "@/data/faqs";
 import { ContactCtas, Faqs, JsonLd, Section } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
 import { ProductCard } from "@/components/ProductCard";
+import { HeroSlider, type Slide } from "@/components/HeroSlider";
 import { pageMetadata, organizationJsonLd } from "@/lib/seo";
-import { business } from "@/config/business";
+import { business, telHref } from "@/config/business";
 
 export const metadata = pageMetadata({
   title: `${business.name} | Multi-brand footwear, retail and wholesale`,
@@ -17,7 +18,17 @@ export const metadata = pageMetadata({
 });
 
 export default function Home() {
+  const tel = telHref();
   const featured = realProducts.filter((p) => p.featured).slice(0, 8);
+  const slides: Slide[] = realProducts
+    .filter((p) => p.brandSlug === "woccy" && p.images[0])
+    .slice(0, 4)
+    .map((p) => ({
+      href: `/shop/${p.slug}`,
+      title: p.name,
+      caption: `Woccy${p.sizes?.length ? ` · sizes ${p.sizes[0]}-${p.sizes[p.sizes.length - 1]}` : ""} · price on inquiry`,
+      src: p.images[0].src, alt: p.images[0].alt, width: p.images[0].width, height: p.images[0].height,
+    }));
   const tiles = categories
     .filter((c) => categoryHasRealProducts(c.slug))
     .map((c) => {
@@ -30,7 +41,7 @@ export default function Home() {
       <JsonLd data={organizationJsonLd()} />
 
       <section className="relative overflow-hidden bg-ink text-sand">
-        <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 sm:py-24 lg:grid-cols-[1.1fr_0.9fr]">
+        <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-12 sm:py-20 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
             <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-gold-light">Retail · Wholesale · South India</p>
             <h1 className="font-display text-4xl font-bold leading-[1.05] sm:text-6xl">
@@ -44,8 +55,17 @@ export default function Home() {
               <Link href="/wholesale/inquiry" className="btn btn-primary">Request wholesale quote</Link>
             </div>
           </div>
-          <div className="flex justify-center">
-            <Image src="/brand/sa-footwear-logo.webp" alt={`${business.name} logo: Retail & Wholesale footwear`} width={1536} height={1024} priority sizes="(min-width:1024px) 40vw, 90vw" className="w-full max-w-lg rounded-3xl" />
+          <div>
+            <HeroSlider slides={slides} />
+            <div className="mx-auto mt-5 w-full max-w-md rounded-2xl border border-white/15 bg-white/5 p-5">
+              <p className="text-xs font-semibold uppercase tracking-widest text-gold-light">Talk to us</p>
+              {tel && <p className="mt-2 font-display text-2xl font-bold"><a href={tel} className="hover:underline">{business.phone}</a></p>}
+              <p className="mt-1 text-sm text-sand/80">{business.location}</p>
+              <div className="mt-4 flex flex-wrap gap-3">
+                <Link href="/wholesale/inquiry" className="btn btn-primary">Request quote</Link>
+                {tel && <a href={tel} className="btn bg-sand text-ink hover:bg-white">Call now</a>}
+              </div>
+            </div>
           </div>
         </div>
       </section>
